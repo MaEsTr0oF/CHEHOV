@@ -1,0 +1,22 @@
+.status-awaiting {
+	background-color: #fff3cd;
+	color: #664d03;
+ }
+ 
+ .status-in-transit {
+	background-color: #cfe2ff;
+	color: #084298;
+ }
+ 
+ .status-delivered {
+	background-color: #d4edda;
+	color: #155724;
+ }
+ 
+ select.status-select {
+	cursor: pointer;
+ }
+#clearCargoButton {
+	margin-left: auto;
+ }
+  
