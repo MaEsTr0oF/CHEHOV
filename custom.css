@@ -1,0 +1,39 @@
+:root {
+	--custom-primary: #5f7adb;
+	--custom-secondary: #a2b2ee;
+	--custom-accent: #7b8cdd;
+	--custom-text: #26292b;
+	--custom-light-bg: #ffffff;
+	--custom-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+	--custom-transition: all 0.3s ease-out;
+ }
+ 
+ /* Удалены кастомные классы размеров шрифтов: fs-7, fs-8, fs-ultra */
+ /* Вместо этого используются стандартные размеры Bootstrap */
+ 
+ /* Фиксированные высоты для .faq-item и .custom-card убраны для улучшения адаптивности */
+ 
+ /* Плавная анимация ховера для табов (nav-link) */
+ .nav-link {
+	transition: background-color 0.3s ease, transform 0.3s ease;
+ }
+ 
+ .nav-link:hover {
+	transform: translateY(-2px);
+ }
+ 
+ /* Дополнительный hover для карточек */
+ .card:hover {
+	transform: translateY(-5px);
+	transition: var(--custom-transition);
+ }
+ 
+ /* Стили для кастомных уведомлений, если необходимо */
+ .custom-alert-info {
+	background-color: var(--custom-secondary);
+	border-color: var(--custom-secondary);
+	color: var(--custom-text);
+ }
+ 
+ /* Остальные медиа-правила и кастомные отступы заменены на утилиты Bootstrap */
+ 

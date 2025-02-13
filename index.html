@@ -1,100 +1,374 @@
 <!DOCTYPE html>
 <html lang="ru">
-
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Отслеживание Грузов</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Page Title</title>
+  <link rel="stylesheet" href="custom.css" />
+  <!-- Используем Bootstrap 5.2.3 -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    rel="stylesheet"
+  />
 </head>
-
 <body>
-	<div class="container my-5">
-		<h1 class="mb-4">Отслеживание Грузов</h1>
+  <div class="my-4">
+    <div class="container">
+      <div class="bg-white mb-4 rounded shadow py-4 px-4">
+        <h1 class="text-center mb-3">
+          Оформить доставку от пункта AVITO до ПВЗ FTEK
+        </h1>
+        <p class="lead mb-0 text-center">
+          Данная услуга позволяет получить посылки от AVITO в выбранном вами пункте
+          выдачи заказов FTEK.
+        </p>
+      </div>
 
-		<div class="card mb-5">
-			<div class="card-header">
-				Добавить Новый Груз
-			</div>
-			<div class="card-body">
-				<form id="addCargoForm">
-					<div class="row mb-3">
-						<div class="col-md-6">
-							<label for="cargoName" class="form-label">Название Груза</label>
-							<input type="text" class="form-control" id="cargoName" required>
-						</div>
-						<div class="col-md-3">
-							<label for="origin" class="form-label">Пункт Отправления</label>
-							<select class="form-select" id="origin" required>
-								<option value="" selected disabled>Выберите город</option>
-								<option>Москва</option>
-								<option>Санкт-Петербург</option>
-								<option>Казань</option>
-								<option>Екатеринбург</option>
-								<option>Новосибирск</option>
-							</select>
-						</div>
-						<div class="col-md-3">
-							<label for="destination" class="form-label">Пункт Назначения</label>
-							<select class="form-select" id="destination" required>
-								<option value="" selected disabled>Выберите город</option>
-								<option>Москва</option>
-								<option>Санкт-Петербург</option>
-								<option>Казань</option>
-								<option>Екатеринбург</option>
-								<option>Новосибирск</option>
-							</select>
-						</div>
-					</div>
-					<div class="row mb-3">
-						<div class="col-md-3">
-							<label for="departureDate" class="form-label">Дата Отправления</label>
-							<input type="date" class="form-control" id="departureDate" required>
-						</div>
-						<div class="col-md-3">
-							<label for="status" class="form-label">Статус Груза</label>
-							<select class="form-select" id="status">
-								<option value="Ожидает отправки" selected>Ожидает отправки</option>
-								<option value="В пути">В пути</option>
-								<option value="Доставлен">Доставлен</option>
-							</select>
-						</div>
-					</div>
-					<button type="submit" class="btn btn-primary">Добавить Груз</button>
-				</form>
-			</div>
-		</div>
-		<div class="mb-3 d-flex align-items-center">
-			<label for="filterStatus" class="form-label me-2">Фильтр по Статусу:</label>
-			<select class="form-select w-25 me-3" id="filterStatus">
-				<option value="all" selected>Все</option>
-				<option value="Ожидает отправки">Ожидает отправки</option>
-				<option value="В пути">В пути</option>
-				<option value="Доставлен">Доставлен</option>
-			</select>
+      <!-- Панель табов на основе Bootstrap nav-tabs -->
+      <ul class="nav nav-tabs nav-fill mb-4" id="instructionTabs" role="tablist">
+        <li class="nav-item">
+          <button
+            class="nav-link active"
+            id="first-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#first"
+            type="button"
+            role="tab"
+            aria-controls="first"
+            aria-selected="true"
+          >
+            Оформление заказа в AVITO
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            id="second-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#second"
+            type="button"
+            role="tab"
+            aria-controls="second"
+            aria-selected="false"
+          >
+            Варианты доставки AVITO
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            id="third-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#third"
+            type="button"
+            role="tab"
+            aria-controls="third"
+            aria-selected="false"
+          >
+            Заполнение заявки на доставку
+          </button>
+        </li>
+        <li class="nav-item">
+          <button
+            class="nav-link"
+            id="four-tab"
+            data-bs-toggle="tab"
+            data-bs-target="#four"
+            type="button"
+            role="tab"
+            aria-controls="four"
+            aria-selected="false"
+          >
+            Часто задаваемые вопросы
+          </button>
+        </li>
+      </ul>
 
-			<button type="button" class="btn btn-danger" id="clearCargoButton">Удалить все грузы</button>
-		</div>
+      <div class="tab-content shadow bg-white rounded p-3" id="instructionTabsContent">
+        <!-- ТАБ 1 -->
+        <div class="tab-pane fade show active" id="first" role="tabpanel" aria-labelledby="first-tab">
+          <h2 class="fw-bold text-primary border-bottom pb-2 text-center text-md-start">
+            Оформление заказа в AVITO
+          </h2>
+          <div class="pt-3">
+            <p class="mb-3 text-center text-md-start">
+              Для того, чтобы оформить заказ на Avito, необходимо:
+            </p>
+            <ul class="list-unstyled ps-0">
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-person-plus-fill me-1"></i> Регистрация на AVITO:
+                </strong>
+                Необходимо зарегистрироваться на <a href="https://www.avito.ru/" target="_blank">сайте</a>,
+                либо в приложении AVITO. При регистрации обязательно указывайте собственные контактные данные
+                (ФИО, номер телефона, адрес электронной почты).
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-shop-window me-1"></i> Выбор товаров:
+                </strong>
+                Выбираете товар, связываетесь с продавцом и оформляете Авито-доставку.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-cart-fill me-1"></i> Способ доставки:
+                </strong>
+                Выбираете один из способов и адрес доставки. Информация о способах доставки указана в разделе
+                <b>"Варианты доставки AVITO"</b>.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-credit-card-fill me-1"></i> Оплата заказа:
+                </strong>
+                Самостоятельно оплачиваете заказ и отслеживаете.
+              </li>
+            </ul>
+            <div class="alert alert-danger">
+              <i class="bi bi-shield-fill-exclamation me-2"></i>
+              Внимание! Авито-доставка является высоко рисковой сделкой, поскольку продавцы могут оказаться
+              мошенниками и отправить другой товар или отличающегося качества. При получении заказа явно
+              отличающего от заявленного Вами — наш менеджер согласует дальнейшие действия. Если визуально нет
+              возможности определить соответствие – все риски ложатся на покупателя.
+            </div>
+          </div>
+        </div>
+        <!-- ТАБ 2 -->
+        <div class="tab-pane fade" id="second" role="tabpanel" aria-labelledby="second-tab">
+          <h2 class="fw-bold text-primary border-bottom pb-2 text-center text-md-start">
+            Варианты доставки AVITO
+          </h2>
+          <div class="pt-3">
+            <p class="mb-3 text-center text-md-start">
+              У AVITO есть варианты доставки сторонними службами. Получателя указываете в зависимости от курьерской доставки:
+            </p>
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h4 class="card-title text-primary mb-2">Почта России</h4>
+                    <p class="mb-1"><strong>Адрес доставки:</strong> Ростовская обл., г. Донецк, пр-кт Ленина, д. 3.</p>
+                    <p class="mb-1"><strong>Доверенность:</strong> Необходимо создать электронную доверенность на
+                      <strong>Воротынцеву Татьяну Александровну +7(928)116-71-42</strong> в личном кабинете Почты России.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h4 class="card-title text-primary mb-2">DPD</h4>
+                    <p class="mb-1"><strong>Адрес доставки:</strong> ПВЗ DPD – Ростовская обл., г. Донецк, ул. М.Горького, д. 160.</p>
+                    <p class="mb-1"><strong>Код получения:</strong> Необходимо указать код получения в DPD.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h4 class="card-title text-primary mb-2">Boxberry</h4>
+                    <p class="mb-1"><strong>Адрес доставки:</strong> ПВЗ Boxberry – Ростовская обл., г. Донецк, ул. М.Горького, д. 160.</p>
+                    <p class="mb-1"><strong>Код получения:</strong> Необходимо указать код получения в Boxberry.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h4 class="card-title text-primary mb-2">Курьерская доставка</h4>
+                    <p class="mb-1"><strong>Адрес доставки:</strong> Ростовская обл., г. Донецк, 3 мкр., д. 1 (ПВЗ OZON)</p>
+                    <p class="mb-1"><strong>Получатель:</strong> Указываете себя, а дополнительным получателем – <strong>Воротынцева Татьяна Александровна, тел. +7 (928) 116-71-42</strong></p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h4 class="card-title text-primary mb-2">Яндекс</h4>
+                    <p class="mb-1"><strong>Адрес доставки:</strong> Ростовская обл., г. Донецк, пр-кт Мира, д. 142</p>
+                    <p class="mb-1"><strong>Код получения:</strong> При заполнении формы необходимо указать код получения в Яндекс.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h4 class="card-title text-primary mb-2">CDEK</h4>
+                    <p>Если заказ оформлен на доставку через CDEK, то необходимо оформлять заявку по инструкции CDEK на соответствующей странице.</p>
+                    <a href="https://ftekrf.ru/cdek.html" target="_blank" class="btn btn-primary mt-2">Перейти к инструкции CDEK</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ТАБ 3 -->
+        <div class="tab-pane fade" id="third" role="tabpanel" aria-labelledby="third-tab">
+          <h2 class="fw-bold text-primary border-bottom pb-2 text-center text-md-start">
+            Заполнение заявки доставки
+          </h2>
+          <div class="pt-3">
+            <p class="mb-3 text-center text-md-start">
+              При поступлении заказа на выбранный Вами пункт выдачи, необходимо заполнить заявку:
+            </p>
+            <ul class="list-unstyled ps-0">
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-buildings-fill me-1"></i> Город получателя:
+                </strong>
+                Выберите один из перечисленных городов, где находится FTEK.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-shop-window me-1"></i> Пункт выдачи:
+                </strong>
+                Выберите ПВЗ FTEK.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-person-fill me-1"></i> ФИО получателя:
+                </strong>
+                Укажите актуальные данные получателя.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-telephone-fill me-1"></i> Номер телефона получателя:
+                </strong>
+                Укажите актуальные данные получателя.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-envelope-at me-1"></i> Электронная почта:
+                </strong>
+                Укажите рабочую почту для отслеживания заказа.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-123 me-1"></i> Номер заказа:
+                </strong>
+                Укажите номер заказа Avito.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-123 me-1"></i> Код получения:
+                </strong>
+                Укажите код получения заказа Avito.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-qr-code me-1"></i> Штрихкод, QR-код:
+                </strong>
+                Загрузите скриншот со штрихкодом/QR-кодом из заказа.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-camera-fill me-1"></i> Скриншоты товаров:
+                </strong>
+                Загрузите скриншоты получаемых товаров.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-currency-dollar me-1"></i> Объявленная стоимость:
+                </strong>
+                Укажите общую стоимость получаемых товаров (в рублях).
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-chat-left-dots-fill me-1"></i> Комментарий к заказу:
+                </strong>
+                Укажите дополнительные комментарии к заказу (при необходимости).
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-check2-circle me-1"></i> Условия:
+                </strong>
+                Ознакомьтесь и примите условия оферты и обработки персональных данных.
+              </li>
+              <li class="mb-3">
+                <strong class="text-primary">
+                  <i class="bi bi-send-check-fill me-1"></i> Оформление:
+                </strong>
+                Нажмите «Оформить заказ».
+              </li>
+            </ul>
+          </div>
+        </div>
+        <!-- ТАБ 4 -->
+        <div class="tab-pane fade" id="four" role="tabpanel" aria-labelledby="four-tab">
+          <h2 class="fw-bold text-primary border-bottom pb-2 text-center text-md-start">
+            Часто задаваемые вопросы
+          </h2>
+          <div class="pt-3">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h3 class="h5 text-primary mb-2">Сколько стоит доставка?</h3>
+                    <p>
+                      Стоимость доставки зависит от стоимости заказанных товаров. От 5 до 10% от стоимости,
+                      чем больше цена, тем меньше процент.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h3 class="h5 text-primary mb-2">Как отследить посылку?</h3>
+                    <p>
+                      Вы можете отследить статус посылки, воспользовавшись сервисом отслеживания на главной странице нашего сайта.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h3 class="h5 text-primary mb-2">Как долго хранится посылка?</h3>
+                    <p>
+                      Посылка хранится в пункте выдачи FTEK 7 календарных дней. По истечении этого срока наступает «платное хранение».
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h3 class="h5 text-primary mb-2">Какой срок доставки?</h3>
+                    <p>1–2 дня (с момента поступления заказа с Avito)</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h3 class="h5 text-primary mb-2">Как оплатить доставку?</h3>
+                    <p>
+                      Оплата услуг доставки осуществляется получателем при получении в ПВЗ FTEK.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="card shadow h-100">
+                  <div class="card-body text-center">
+                    <h3 class="h5 text-primary mb-2">Как получать уведомления?</h3>
+                    <p>
+                      Вы будете получать уведомления о статусе заказа на указанную в заявке электронную почту.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- /.tab-content -->
+    </div>
+  </div>
 
-		<table class="table table-bordered table-hover">
-			<thead class="table-light">
-				<tr>
-					<th>Номер Груза</th>
-					<th>Название Груза</th>
-					<th>Статус Груза</th>
-					<th>Пункт Отправления</th>
-					<th>Пункт Назначения</th>
-					<th>Дата Отправления</th>
-				</tr>
-			</thead>
-			<tbody id="cargoTableBody">
-			</tbody>
-		</table>
-	</div>
-
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-	<script src="scripts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
